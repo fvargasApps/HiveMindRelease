@@ -1,4 +1,7 @@
 # HiveMindRelease
+
+Archivos necesarios para esta versión beta: https://github.com/appSolutionsApp4Net/HiveMindRelease/releases/tag/V1.0.1
+
 🛡️ Guía de Inicio: HiveMind Tensor Desktop
 Bienvenido al motor de Inteligencia Artificial Distribuida para escritorio. Esta guía te ayudará a configurar tu enjambre de procesamiento en minutos.
 
@@ -43,7 +46,7 @@ NOTA EXTRA: POR EL MOMENTO LA APLICACIÓN DE INFERENCIA SOLO ACEPTA MODELOS YA C
 
    4. 🚀 Ejemplo Práctico: YOLOv8Nano (Visión Artificial)
    
-      - He incluido un modelo listo para usar en la carpeta Modelos Ejemplo.
+      - He incluido un modelo listo para usar YoloV8NanoEjemplo.zip.
 
       - Modelo: yolov8n_float32.tflite.
 
