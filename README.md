@@ -5,52 +5,65 @@ Bienvenido al motor de Inteligencia Artificial Distribuida para escritorio. Esta
 1. 🖥️ Requisitos Mínimos del Sistema
 Para garantizar una ejecución fluida, asegúrate de cumplir con lo siguiente:
 
-Espacio en Disco: Al menos 2 GB de este programa ya instalado.
+ - Espacio en Disco: Al menos 2 GB de este programa ya instalado.
 
-Memoria RAM: Mínimo 8 GB (Recomendado 16 GB para cargar modelos grandes directamente en memoria).
+ - Memoria RAM: Mínimo 8 GB (Recomendado 16 GB para cargar modelos grandes directamente en memoria).
 
-Arquitectura: Windows 10/11 de 64 bits (x64).
+ - Arquitectura: Windows 10/11 de 64 bits (x64).
 
-Procesador: Intel Core i5 o AMD Ryzen 5 (mínimo) para gestionar la orquestación gRPC.
+ - Procesador: Intel Core i5 o AMD Ryzen 5 (mínimo) para gestionar la orquestación gRPC.
 
 2. 📱 Requisitos para Nodos Android
-HiveMind utiliza la potencia de tus dispositivos móviles para acelerar la inferencia.
+ - HiveMind utiliza la potencia de tus dispositivos móviles para acelerar la inferencia.
 
-Versión de Android: 8.0 (Oreo) o superior.
+ - Versión de Android: 8.0 (Oreo) o superior.
 
-Conexión: Red Wi-Fi estable (misma red que la PC) o conexión vía cable USB (requiere activar Depuración USB).
+ - Conexión: Red Wi-Fi estable (misma red que la PC) o conexión vía cable USB (requiere activar Depuración USB).
 
-SDK: Instalar el APK de HiveMind Coordinator en cada dispositivo.
+ - APK Firmado: Hivemind-Node-V1.0.1.apk en cada dispositivo.
 
 3. 📦 Integración del SDK (SDK.zip)
-Si eres desarrollador, puedes crear tus propios scripts de IA que utilicen el enjambre. Dentro del archivo SDK.zip encontrarás las herramientas necesarias.
-
-Cómo importar el SDK en tu proyecto:
-
-Extrae el contenido de SDK.zip en la carpeta raíz de tu proyecto de Python.
-
-Asegúrate de tener instaladas las dependencias de comunicación: pip install grpcio protobuf numpy.
-
-Importa el cliente en tu código:
-
-En el ejemplo de modelo Yolo que te mostramos viene una ligera guia de como puedes empezar  a importar el SDK de manera correcta.
-
-
-4. 🚀 Ejemplo Práctico: YOLOv8 (Visión Artificial)
    
-He incluido un modelo listo para usar en la carpeta Modelos Ejemplo.
+Si eres desarrollador, puedes crear tus propios scripts de IA que utilicen el enjambre. Dentro del archivo SDK.zip encontrarás las herramientas necesarias.
+   1) hivemind.py: Archivo python que contiene metodos necesarios con información necesaria en su summary de como implementarlos y para que proposito.
+   2) hivemind_pb2: Archivo necesario para comunicación SDK no lo muevas fuera de la misma ruta que hivemind.py
+   3) hivemind_pb2_grpc: Archivo necesario para comunicación SDK no lo muevas fuera de la misma ruta que hivemind.py
 
-Modelo: yolov8n_float32.tflite.
+   - Cómo importar el SDK en tu proyecto:
 
-Uso: Selecciona este modelo desde la interfaz de HiveMind Desktop. Verás cómo la carga es instantánea gracias a nuestro nuevo motor de inicialización perezosa.
+      -   Extrae el contenido de SDK.zip en la carpeta raíz de tu proyecto de Python, se desplegará una carpeta con nombre hivemind_sdk esa carpeta contiene lo necesario para funcionar como libreria.
+      -   Asegúrate de tener instaladas las dependencias de comunicación: pip install grpcio protobuf numpy.
+      -   Nota: El SDK requiere de varias librerias, se incorporó un requirements.txt donde tienen el nombre y la versión necesarias y crearles su entorno virtual necesario.
 
-Dato Curioso: Este modelo puede procesar imágenes en milisegundos cuando distribuyes la carga entre varios celulares.
+   - Como importa el SDK en tu código:
 
-NOTA: para poder descomprimir todas las partes de el aplicativo usa 7Zip y usa todas las partes para complementar el .exe
+      - En el ejemplo de modelo YoloV8Nano dentro de /Modelos ejemplo que te mostramos viene una ligera guia de como puedes empezar a importar el SDK de manera correcta.
+     
+NOTA EXTRA: POR EL MOMENTO LA APLICACIÓN DE INFERENCIA SOLO ACEPTA MODELOS YA CONVERTIDOS A TENSOR FLOW LITE CON EL FORMATO .tflite, COMO FUE ENTRENADO EL MODELO, A QUE TARGET LO CONVIERTAS (UINT8, INT8, FLOAT16, FLOAT32) ES RESPONSABILIDAD DEL USUARIO, LOS PESOS, TIPOS DE DATOS Y RESPUESTAS DEBEN COINCIDIR PARA QUE EL PROYECTO FUNCIONE BIEN.
 
-5. Aplicación para Windows V1.0.0. (Temporal para la versión Beta)
-  Ve a Aplicación de partes, descarga las partes necesarias dentro de la misma y usa 7 Zip File Manager para reorganizar y reconstruir el .EXE de la aplicación Core, instala y acepta las politicas de privacidad y terminos de uso, una vez aceptado podrás empezar a probar la herramienta.
+   4. 🚀 Ejemplo Práctico: YOLOv8Nano (Visión Artificial)
+   
+      - He incluido un modelo listo para usar en la carpeta Modelos Ejemplo.
 
+      - Modelo: yolov8n_float32.tflite.
+
+      - Uso: Selecciona este modelo desde la interfaz de HiveMind Desktop, la primera vez que cargues un modelo al sistema será un poco lenta, conforme la uses más identificaras que el tiempo requerido es mínimo, tomalo en cuenta.
+
+      - Conectar: Identifica un puerto disponible (recomendamos usar 50052), e inicia el Servidor.
+      - Hacer Visible: Haz visible el entorno para que los nodos android detecten al servidor.
+      - Configurar: Te mostraré si estaremnos usando el venv de tu proyecto o las librerias globales de python, adempas tendrás una sección para introducir parametros extra en tu ejecución, como si desde una terminal se tratase.
+      - Ejecutar: Primero hara un proceso de Warming para informarle a los nodos que estan a punto de obtener trabajo.
+      - Ejecución: Una vez pasado un periodo de gracia la aplicación ejecutara tu Script que hayas seleccionado y correra en un hilo separado esa aplicación.
+
+Dato Curioso: Este modelo ejemplo puede procesar imágenes en milisegundos cuando distribuyes la carga entre varios celulares.
+
+
+5. Aplicación para Windows V1.0.0. (versión Beta)
+  - Ve a releases y assets y descarga el archivo .exe llamado HiveMind Core Setup 1.0.0, instala el software donde desees que tenga permisos de escritura y lectura, te recomendamos tener 2GB disponibles en tu disco, ya que las        librerias de TensorFlow y comunicación suelen pesar mucho,  se esta trabajando para reducir volumenes sin perder eficiencia.
+
+6. Instalar apk en nodos: Instalar apk Firmado Hivemind-Node-V1.0.1.apk, con este deberemos aceptar los permisos mínimos que requerimos para funciona, y descuida no compartimos ningún dato con terceros puedes leer nuestra poílitca de privacidad en https://docs.google.com/document/d/1-d91WqzhPOSJRrJuYv979qc1cqk2JTeCir8gKWbWmwI/edit?tab=t.0#heading=h.b9af4ha5ochk
+
+LO MÁS EXTRAORDINARIO!
 
 🔒 Confianza y Seguridad
 Protección de Datos: HiveMind funciona de forma 100% Local. Tus modelos y datos nunca salen de tu red privada; la comunicación entre la PC y los celulares está encriptada y protegida por tokens únicos de sesión.
